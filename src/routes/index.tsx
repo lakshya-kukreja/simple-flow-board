@@ -1,24 +1,27 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Board } from "@/components/board/Board";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "FlowBoard — Mini Kanban Task Board" },
+      {
+        name: "description",
+        content:
+          "FlowBoard is a clean mini Kanban board: organise tasks across Todo, In Progress and Done, with light, dark and disco themes.",
+      },
+      { property: "og:title", content: "FlowBoard — Mini Kanban Task Board" },
+      {
+        property: "og:description",
+        content: "Organise tasks across Todo, In Progress and Done on a simple, fast Kanban board.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+  return <Board />;
 }
